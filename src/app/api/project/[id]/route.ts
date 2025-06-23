@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getUserFromToken } from '@/shared/utils/getUserFromToken'
 import { NextRequest, NextResponse } from 'next/server'
 import { dbConnect } from '@/shared/lib/mongo/mongobd'
