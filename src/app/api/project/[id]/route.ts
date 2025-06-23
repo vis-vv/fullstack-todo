@@ -3,14 +3,15 @@ import { NextRequest, NextResponse } from 'next/server'
 import { dbConnect } from '@/shared/lib/mongo/mongobd'
 import { ObjectId } from 'mongodb'
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params } : {params: Promise<{id: string}>}) {
+
     try {
         const user = await getUserFromToken()
         if (!user) {
             return NextResponse.json({ ok: false }, { status: 401 })
         }
-
-        const projectId = params.id
+        const resolvedParams = await params
+        const projectId = resolvedParams.id
         const body = await req.json()
 
         const { title, description, icon, teamMembers } = body

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { IProjectForm } from '@/features/createProject/model/type'
 import { formatDate } from '@/shared/utils/formatDate'
 import { useRouter } from 'next/navigation'
+import {IProjectForm} from "@/features/projectsForm/model/type";
 
 export const useCreateProject = (
     onSuccess: () => void

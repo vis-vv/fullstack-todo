@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { IProjectType } from '@/features/putProject/modal/type'
-import { IProjectForm } from '@/features/createProject/model/type'
 import { useRouter } from 'next/navigation'
+import {IProjectForm, IProjectType} from "@/features/projectsForm/model/type";
 
 interface UsePutProjectReturn {
     createForm: IProjectForm
