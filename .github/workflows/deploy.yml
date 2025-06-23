@@ -8,23 +8,27 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Yandex CLI
-        run: |
-          curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-          echo "$HOME/yandex-cloud/bin" >> $GITHUB_PATH
+      - name: Install Yandex Cloud CLI
+        uses: yandex-cloud/yc-actions/yc-cli-install@v1.2.0
 
-      - name: Auth with service account
-        run: |
-          echo '${{ secrets.YC_SA_KEY_JSON }}' > key.json
-          yc config set service-account-key key.json
-          yc config list
+      - name: Login to Yandex Container Registry
+        id: login-cr
+        uses: yandex-cloud/yc-actions/yc-cr-login@v1.2.0
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_KEY_JSON }}
 
-      - name: Deploy script
+      - name: Build, tag, and push image to Yandex Container Registry
         run: |
-          # Твоя логика: Docker push, yc compute create и т.п.
-          yc compute instance list
+          docker build -t ${{ steps.login-cr.outputs.registry-address }}/${{ secrets.YC_REGISTRY_ID }}/my-next-app:${{ github.sha }} .
+          docker push ${{ steps.login-cr.outputs.registry-address }}/${{ secrets.YC_REGISTRY_ID }}/my-next-app:${{ github.sha }}
+
+      - name: Deploy new Serverless Container revision
+        uses: yandex-cloud/yc-actions/yc-sls-container-deploy@v1.2.0
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_KEY_JSON }}
+          container-id: ${{ secrets.YC_CONTAINER_ID }}
+          image-url: ${{ steps.login-cr.outputs.registry-address }}/${{ secrets.YC_REGISTRY_ID }}/my-next-app:${{ github.sha }}
