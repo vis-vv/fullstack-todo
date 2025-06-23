@@ -1,0 +1,45 @@
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #2d3748;
+    border: 1px solid #4a5568;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+}
+
+.dropdownMenu button {
+    background: none;
+    border: none;
+    color: #e2e8f0;
+    padding: 10px 12px;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.dropdownMenu button:hover {
+    background-color: #4a5568;
+}
+
+.dropdownMenu .deleteButton {
+    color: #e53e3e;
+}
+
+.dropdownMenu .deleteButton:hover {
+    background-color: rgba(229, 62, 62, 0.2);
+}
+
+.btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}

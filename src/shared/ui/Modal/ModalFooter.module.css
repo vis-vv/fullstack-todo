@@ -1,0 +1,23 @@
+.modalFooter {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modalFooterFlex {
+    justify-content: flex-end;
+}
+
+.blockBtn {
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .modalFooter {
+        flex-direction: column-reverse;
+    }
+}

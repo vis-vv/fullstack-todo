@@ -1,0 +1,13 @@
+.pageHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pageSubtitle {
+    color: var(--color-grey);
+    font-weight: 500;
+}
+
+.title {
+    margin-bottom: 0.5rem;
+}

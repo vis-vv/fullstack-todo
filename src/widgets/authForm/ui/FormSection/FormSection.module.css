@@ -1,0 +1,42 @@
+.formSection {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.cardHeader {
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.cardTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    margin: 0 0 0.5rem 0;
+}
+
+.cardDescription {
+    color: #cbd5e1;
+    margin: 0;
+}
+
+.cardContent {
+    padding: 0;
+}
+
+.tabContent {
+    margin-top: 1.5rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

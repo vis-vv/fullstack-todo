@@ -1,0 +1,60 @@
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+}
+.error {
+    font-size: 12px;
+    color: #f56565;
+}
+
+.textarea {
+    background: rgba(26, 29, 41, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.input,
+.textarea,
+.select {
+    background: rgba(26, 29, 41, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: #a0aec0;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .formRow {
+        grid-template-columns: 1fr;
+    }
+}

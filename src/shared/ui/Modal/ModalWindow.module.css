@@ -1,0 +1,356 @@
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+}
+
+.teamSection {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.removeMember {
+    background: none;
+    border: none;
+    color: #667eea;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+}
+
+.removeMember:hover {
+    background: rgba(102, 126, 234, 0.2);
+}
+
+.selectedMembers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.memberChip {
+    background: rgba(102, 126, 234, 0.2);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 16px;
+    padding: 0.25rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: #667eea;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modalContainer {
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal {
+    background: rgba(45, 55, 72, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2rem;
+}
+
+.modalHeader {
+    padding: 2rem 2rem 1rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modalTitleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.modalTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.modalSubtitle {
+    color: #a0aec0;
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.closeButton {
+    color: #a0aec0;
+    background: transparent;
+}
+
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.formSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.error {
+    font-size: 12px;
+    color: #f56565;
+}
+
+.input,
+.textarea,
+.select {
+    background: rgba(26, 29, 41, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: #a0aec0;
+}
+
+.helperText {
+    font-size: 0.75rem;
+    color: #a0aec0;
+    margin: -0.25rem 0 0.5rem 0;
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.templatesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.templateCard {
+    background: rgba(26, 29, 41, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.templateCard:hover {
+    border-color: rgba(102, 126, 234, 0.3);
+    background: rgba(26, 29, 41, 0.6);
+}
+
+.templateContent {
+    padding: 1rem;
+}
+
+.templateHeader {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.templateIcon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--template-color);
+    flex-shrink: 0;
+}
+
+.templateInfo {
+    flex: 1;
+}
+
+.templateName {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+    color: white;
+}
+
+.templateDescription {
+    font-size: 0.75rem;
+    color: #a0aec0;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.templateTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.templateTag {
+    background: rgba(102, 126, 234, 0.2);
+    color: #667eea;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    font-size: 0.625rem;
+    padding: 0.125rem 0.375rem;
+}
+
+.addMemberButton {
+    background: rgba(45, 55, 72, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    flex-shrink: 0;
+}
+
+.modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cancelButton {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #a0aec0;
+}
+
+.cancelButton:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+
+.createButton {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    min-width: 140px;
+}
+
+.createButton:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+}
+
+.iconGrid {
+    display: grid;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 200px;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 0.5rem;
+    padding-right: 4px;
+}
+
+.iconOption {
+    flex: 1 0 calc(25% - 0.5rem);
+    max-width: calc(25% - 0.5rem);
+    min-width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.iconOption:hover,
+.iconOption:focus {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+@media (max-width: 768px) {
+    .modalContainer {
+        max-height: 95vh;
+    }
+
+    .modalHeader {
+        padding: 1.5rem 1.5rem 1rem 1.5rem;
+    }
+
+    .modalContent {
+        padding: 1.5rem;
+    }
+
+    .formRow {
+        grid-template-columns: 1fr;
+    }
+
+    .templatesGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .iconGrid {
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    }
+
+    .iconOption {
+        width: 40px;
+        height: 40px;
+    }
+
+    .teamSection {
+        flex-direction: column;
+    }
+
+    .modalFooter {
+        flex-direction: column-reverse;
+    }
+}

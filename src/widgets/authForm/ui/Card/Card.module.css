@@ -1,0 +1,44 @@
+.card {
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: rgba(148, 163, 184, 0.3);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+.cardHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding-bottom: 1.5rem;
+}
+
+.cardTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: white;
+}
+
+.cardDescription {
+    font-size: 0.875rem;
+    color: #94a3b8;
+}
+
+.cardContent {
+    padding-top: 0;
+}
+
+.cardFooter {
+    display: flex;
+    align-items: center;
+    padding-top: 1.5rem;
+}
