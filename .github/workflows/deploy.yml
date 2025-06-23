@@ -1,5 +1,3 @@
-# Этот комментарий для принудительного обновления
-
 name: Deploy to Yandex Cloud
 
 on:
@@ -10,30 +8,24 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Install Yandex Cloud CLI
         run: |
           curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-          export PATH=$HOME/yandex-cloud/bin:$PATH
-          yc --version
+          echo "$HOME/yandex-cloud/bin" >> $GITHUB_PATH
 
-      - name: Login to Yandex Container Registry
-        id: login-cr
-        uses: yandex-cloud/yc-actions/yc-cr-login@v1.2.0
-        with:
-          yc-sa-json-credentials: ${{ secrets.YC_SA_KEY_JSON }}
-
-      - name: Build, tag, and push image to Yandex Container Registry
+      - name: Configure Yandex Cloud CLI
         run: |
-          docker build -t ${{ steps.login-cr.outputs.registry-address }}/${{ secrets.YC_REGISTRY_ID }}/my-next-app:${{ github.sha }} .
-          docker push ${{ steps.login-cr.outputs.registry-address }}/${{ secrets.YC_REGISTRY_ID }}/my-next-app:${{ github.sha }}
+          yc config profile create github-ci
+          yc config set token ${{ secrets.YC_OAUTH_TOKEN }}
+          yc config set cloud-id ${{ secrets.YC_CLOUD_ID }}
+          yc config set folder-id ${{ secrets.YC_FOLDER_ID }}
 
-      - name: Deploy new Serverless Container revision
-        uses: yandex-cloud/yc-actions/yc-sls-container-deploy@v1.2.0
-        with:
-          yc-sa-json-credentials: ${{ secrets.YC_SA_KEY_JSON }}
-          container-id: ${{ secrets.YC_CONTAINER_ID }}
-          image-url: ${{ steps.login-cr.outputs.registry-address }}/${{ secrets.YC_REGISTRY_ID }}/my-next-app:${{ github.sha }}
+      - name: Deploy or Run your logic
+        run: |
+          yc compute instance list
+          # или любой нужный деплой
