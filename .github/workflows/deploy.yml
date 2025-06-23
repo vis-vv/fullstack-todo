@@ -10,22 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install Yandex Cloud CLI
+      - name: Install Yandex CLI
         run: |
           curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
           echo "$HOME/yandex-cloud/bin" >> $GITHUB_PATH
 
-      - name: Configure Yandex Cloud CLI
+      - name: Auth with service account
         run: |
-          yc config profile create github-ci
-          yc config set token ${{ secrets.YC_OAUTH_TOKEN }}
-          yc config set cloud-id ${{ secrets.YC_CLOUD_ID }}
-          yc config set folder-id ${{ secrets.YC_FOLDER_ID }}
+          echo '${{ secrets.YC_SA_KEY_JSON }}' > key.json
+          yc config set service-account-key key.json
+          yc config list
 
-      - name: Deploy or Run your logic
+      - name: Deploy script
         run: |
+          # Твоя логика: Docker push, yc compute create и т.п.
           yc compute instance list
-          # или любой нужный деплой
