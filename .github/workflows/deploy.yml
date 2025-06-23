@@ -1,3 +1,4 @@
+
 name: Deploy to Yandex Cloud
 
 on:
@@ -30,7 +31,7 @@ jobs:
 
       - name: Build, tag, and push image to Yandex Container Registry
         env:
-          REGISTRY: crp...your_registry_id_here
+          REGISTRY: cr.yandex/${{ secrets.YC_REGISTRY_ID }}
         run: |
           IMAGE=${REGISTRY}/my-next-app:${{ github.sha }}
           docker build -t $IMAGE .
