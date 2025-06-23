@@ -8,27 +8,41 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Install Yandex Cloud CLI
-        uses: yandex-cloud/yc-actions/yc-cli-install@v1.2.0
+        run: |
+          curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+          echo "$HOME/yandex-cloud/bin" >> $GITHUB_PATH
+
+      - name: Authorize with Yandex Cloud
+        run: |
+          echo '${{ secrets.YC_SA_KEY_JSON }}' > key.json
+          yc config set service-account-key key.json
+          yc config list
 
       - name: Login to Yandex Container Registry
-        id: login-cr
-        uses: yandex-cloud/yc-actions/yc-cr-login@v1.2.0
-        with:
-          yc-sa-json-credentials: ${{ secrets.YC_SA_KEY_JSON }}
+        run: |
+          yc container registry configure-docker
 
       - name: Build, tag, and push image to Yandex Container Registry
+        env:
+          REGISTRY: crp...your_registry_id_here
         run: |
-          docker build -t ${{ steps.login-cr.outputs.registry-address }}/${{ secrets.YC_REGISTRY_ID }}/my-next-app:${{ github.sha }} .
-          docker push ${{ steps.login-cr.outputs.registry-address }}/${{ secrets.YC_REGISTRY_ID }}/my-next-app:${{ github.sha }}
+          IMAGE=${REGISTRY}/my-next-app:${{ github.sha }}
+          docker build -t $IMAGE .
+          docker push $IMAGE
 
-      - name: Deploy new Serverless Container revision
-        uses: yandex-cloud/yc-actions/yc-sls-container-deploy@v1.2.0
-        with:
-          yc-sa-json-credentials: ${{ secrets.YC_SA_KEY_JSON }}
-          container-id: ${{ secrets.YC_CONTAINER_ID }}
-          image-url: ${{ steps.login-cr.outputs.registry-address }}/${{ secrets.YC_REGISTRY_ID }}/my-next-app:${{ github.sha }}
+      - name: Deploy to Serverless Containers
+        run: |
+          IMAGE=${{ secrets.YC_REGISTRY_ID }}/my-next-app:${{ github.sha }}
+          yc serverless container revision deploy \
+            --container-id=${{ secrets.YC_CONTAINER_ID }} \
+            --image=$IMAGE \
+            --memory=512M \
+            --cores=1 \
+            --execution-timeout=30s \
+            --concurrency=4
