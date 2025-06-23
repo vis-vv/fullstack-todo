@@ -1,9 +1,11 @@
+# Этот комментарий для принудительного обновления
+
 name: Deploy to Yandex Cloud
 
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   deploy:
